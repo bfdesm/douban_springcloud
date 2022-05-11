@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="index">
+
+<div id="player" class="player" th:fragment="player">
+    <div class="expand">
+        <div class="player-topbar">
+            <a href="#"><img src="https://img3.doubanio.com/dae/staticng/s/bragi/31f53cb8a880f06214d1d8f69315d07b27cda101/deploy/b6a46d59a094ec51ec67452607965e2c.svg" alt="" class="logo"></a>
+            <div class="feedback"><span>下载豆瓣FM APP · </span><button class="btn-feedback">我要反馈</button></div>
+            <div class="login-signup">
+                <a class="login" href="/login">登录</a>
+                <div class="line"></div>
+                <a class="login" href="/sign">注册</a>
+            </div>
+        </div>
+        <div class="player-container">
+            <div class="qrcode">
+                <img src="https://img3.doubanio.com/f/fm/1e89298732fbf090aea0812f7fb2af30ad82ab61/pics/fm/landingpage/qr_2@2x.png" alt="">
+                <div class="txt"> 下载豆瓣FM APP<br> 让好音乐继续 </div>
+            </div>
+            <div class="song-info">
+                <button class="owner" ></button>
+                <div class="title" th:text="${song.name}"></div>
+                <div class="artist" th:each="singerItem,sit: ${singers}"><span th:text="${singerItem.name}"></span>&nbsp;/&nbsp;</div>
+
+                <div class="duration-options">
+                    <div class="duration">-03:34</div>
+                    <div class="options">
+                        <button class="lyrics"></button>
+                        <button class="download"></button>
+                        <button class="share"></button>
+                    </div>
+                </div>
+                <div class="bar-container" style="opacity: 0">
+                    <div class="bar"></div>
+                </div>
+                <div style=" visibility:hidden"></div>
+                <audio id="audio" style="display:none" controls th:src="${song.url}"> Your browser does not support the <code>audio</code> element. </audio>
+                <div class="progress">
+                    <div class="progress-back"></div>
+                    <div class="progress-cover" style="width: 100px"></div>
+                </div>
+                <div class="options">
+                    <div><button class="star star-collect"></button><button class="trash"></button></div>
+                    <div>
+                        <button class="list"></button>
+                        <button class="random"></button>
+                        <button class="prev"></button>
+                        <button class="player-play-btn play"></button>
+                        <button class="next"></button>
+                    </div>
+                </div>
+                <div class="hint">
+                    <span style="margin-right: -8px"><a href="/login"><button class="btn-login">登录</button></a></span>
+                    <span><a href="/sign"><button class="btn-login">/注册</button></a></span>
+                    <span>后豆瓣FM将永久保留你的收听历史与喜好</span>
+                </div>
+            </div>
+            <div class="song-cover" style="display: inline-block;"><img th:src="${song.cover}" alt="" style="" height="250" width="241"></div>
+        </div>
+        <button class="btn-shrink"></button>
+    </div>
+    <div class="shrink">
+        <a href="#"><img src="/img/logo.26358028.png" alt="" class="logo"></a>
+        <div class="song-info">
+            <div class="title">我不完美</div>
+            <div class="progress">
+                <div class="progress-back"></div>
+                <div class="progress-cover"></div>
+            </div>
+            <div class="owner-duration">
+                <div class="owner">李玖哲 MHz</div>
+                <div class="duration">03:34</div>
+            </div>
+        </div>
+        <div class="options">
+            <button class="star"></button>
+            <button class="trash"></button>
+            <button class="random"></button>
+            <button class="prev"></button>
+            <button class="player-play-btn play"></button>
+            <button class="next"></button>
+            <button class="list"></button>
+        </div>
+        <div class="login-signup">
+            <a class="login" href="/login">登录</a>
+            <div class="line"></div>
+            <a class="login" href="/sign">注册</a>
+        </div>
+        <button class="btn-expand"></button>
+    </div>
+    <div id="login-modal" class="modal player-login modal-close">
+        <div class="modal-mask"></div>
+        <div class="modal-body">
+            <div class="title"><button class="btn-close"></button></div>
+            <div class="form">
+                <div class="tabs">
+                    <div tabindex="0" class="tab login tab-selected">密码登录</div>
+                    <div tabindex="0" class="tab signup">注册</div>
+                </div>
+                <div class="form-login">
+                    <div class="hint"><span class="hint-icon"></span><span class="txt">用户名或密码错误</span></div>
+                    <div class="username"><input type="text" placeholder="用户名" onblur="onblur" class="username-input"></div>
+                    <div class="pwd">
+                        <input type="password" placeholder="密码" class="pwd-input"><a href="#" class="pwd-retrieve">找回密码</a>
+                    </div>
+                    <button type="submit" class="submit">登录豆瓣</button>
+                    <div class="auto-login">
+                        <input type="checkbox" name="" id="auto-login-checkbox">
+                        <label for="auto-login-checkbox">下次自动登录</label>
+                    </div>
+                </div><!---->
+            </div>
+        </div>
+    </div>
+    <script src="/js/player.js"></script>
+</div>
+
+</html>

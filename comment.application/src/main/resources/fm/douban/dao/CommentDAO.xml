@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fm.douban.dao.CommentDAO">
+
+    <resultMap id="commentResultMap" type="fm.douban.dataobject.CommentDO">
+        <id column="id" property="id"/>
+        <result column="ref_id" property="refId"/>
+        <result column="user_id" property="userId"/>
+        <result column="content" property="content"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="gmt_created" property="gmtCreated"/>
+        <result column="gmt_modified" property="gmtModified"/>
+    </resultMap>
+
+    <resultMap id="commentModelResultMap" type="fm.douban.model.Comment">
+        <id column="id" property="id"/>
+        <result column="ref_id" property="refId"/>
+        <result column="content" property="content"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="gmt_created" property="gmtCreated"/>
+        <result column="gmt_modified" property="gmtModified"/>
+        <association property="author" javaType="fm.douban.model.User">
+            <id column="user_id" property="id" />
+            <result column="name" property="name"/>
+            <result column="login_name" property="loginName"/>
+            <result column="logo" property="logo"/>
+            <result column="url" property="url"/>
+        </association>
+    </resultMap>
+
+    <insert id="batchAdd" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO comment (ref_id,user_id,content,parent_id,gmt_created,gmt_modified)
+        VALUES
+        <foreach collection="list" item="it" index="index" separator=",">
+            (#{it.refId}, #{it.userId}, #{it.content}, #{it.parentId},now(),now())
+        </foreach>
+    </insert>
+
+    <insert id="insert" parameterType="fm.douban.dataobject.CommentDO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO comment (ref_id,user_id,content,parent_id,gmt_created,gmt_modified)
+        VALUES(#{refId}, #{userId}, #{content}, #{parentId},now(),now())
+    </insert>
+
+    <delete id="delete">
+        delete from comment where id=#{id}
+    </delete>
+
+    <update id="update" parameterType="fm.douban.dataobject.CommentDO">
+        update comment set
+        <if test="content != null">
+            content=#{content},
+        </if>
+        gmt_modified=now() where id=#{id}
+    </update>
+
+    <select id="findAll" resultMap="commentResultMap">
+        select * from comment
+    </select>
+
+    <select id="findByRefId" resultMap="commentModelResultMap">
+        select a.*,u.user_name,u.nick_name,u.avatar from comment a left join user u
+        on a.user_id=u.id where a.ref_id=#{refId} order by a.gmt_created desc
+    </select>
+
+    <select id="findByUserIds" resultMap="commentResultMap">
+        select * from comment
+        <where>
+            user_id in
+            <foreach item="item" index="index" collection="userIds"
+                     open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </select>
+
+</mapper>

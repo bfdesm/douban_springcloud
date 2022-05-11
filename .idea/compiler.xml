@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="comment.application" />
+        <module name="api.application" />
+        <module name="subject.application" />
+        <module name="main.application" />
+        <module name="user.application" />
+        <module name="song.application" />
+        <module name="model" />
+        <module name="singer.application" />
+        <module name="favorite.application" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api.application" options="-parameters" />
+      <module name="comment.application" options="-parameters" />
+      <module name="favorite.application" options="-parameters" />
+      <module name="main.application" options="-parameters" />
+      <module name="model" options="-parameters" />
+      <module name="singer.application" options="-parameters" />
+      <module name="song.application" options="-parameters" />
+      <module name="subject.application" options="-parameters" />
+      <module name="user.application" options="-parameters" />
+    </option>
+  </component>
+</project>

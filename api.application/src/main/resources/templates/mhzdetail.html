@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout">
+
+<div th:fragment="content">
+    <div class="share-container">
+        <!-- 关闭 -->
+        <span class="close"></span>
+        <!-- 分享 -->
+        <div class="share">
+            <span></span>
+            分享
+        </div>
+        <!-- <div class="modal-share-platform" th:replace="share::share"></div>-->
+        <div class="content">
+            <!-- 头部 -->
+            <div class="top">
+                <img class=".head-icon" style="width:200px;height:200px;border-radius: 50%;" th:src="${subject.cover}">
+                <h4 th:text="${subject.name}"></h4>
+                <div class="like" th:if="${subject.liked_count}!=null" th:text="'喜欢  '+${subject.liked_count}">喜欢  1344</div>
+                <div class="like" th:if="${subject.liked_count}==null">喜欢  0</div>
+            </div>
+            <!-- 全部精选歌曲 -->
+            <div class="select-song">
+                <!-- 标题 -->
+                <div class="title">
+                    <span></span>
+                    全部精选歌曲
+                </div>
+                <!-- 歌曲列表 -->
+                <ul class="song-list">
+                    <li th:each="songItem, sit: ${songs}" >
+                        <span th:style="'background:url(' + ${songItem.cover} + ') no-repeat center;background-size: contain;'"></span>
+                        <p th:text="${sit.count} + '.' + ${songItem.name}"></p>
+                    </li>
+                </ul>
+                <!-- 查看全部精选歌曲 -->
+                <div class="look-all">查看全部精选歌曲</div>
+            </div>
+            <!-- 系列 -->
+            <div class="series">
+                <!-- 标题 -->
+                <div class="title">
+                    <p th:text="${subject.name}"></p>
+                </div>
+                <p class="sub-title">该兆赫可能包含以下相似艺术家的歌曲</p>
+                <ul class="artists">
+                    <li th:each="sSingerItem, ssit: ${simSingers}">
+                        <div class="head-icon"
+                             th:style="'background: url(' + ${sSingerItem.avatar} + ') no-repeat center;background-size: contain;'"></div>
+                        <a style="text-decoration: none;color: black" th:href="${sSingerItem.homepage}"><span th:text="${sSingerItem.name}"></span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>
+
+
+
