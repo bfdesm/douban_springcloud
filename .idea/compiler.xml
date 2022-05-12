@@ -8,15 +8,27 @@
         <outputRelativeToContentRoot value="true" />
         <module name="comment.application" />
         <module name="api.application" />
-        <module name="subject.application" />
-        <module name="main.application" />
         <module name="user.application" />
-        <module name="song.application" />
+        <module name="main.application" />
+        <module name="subject.application" />
         <module name="model" />
+        <module name="song.application" />
         <module name="singer.application" />
         <module name="favorite.application" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="api.application" target="11" />
+      <module name="comment.application" target="11" />
+      <module name="favorite.application" target="11" />
+      <module name="main.application" target="11" />
+      <module name="model" target="11" />
+      <module name="practice" target="11" />
+      <module name="singer.application" target="11" />
+      <module name="song.application" target="11" />
+      <module name="subject.application" target="11" />
+      <module name="user.application" target="11" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
